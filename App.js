@@ -7,32 +7,37 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Home from './Home';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {MainStackScreen} from './root/NavigationRoutes';
+
+const RootStack = createNativeStackNavigator();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={{flex: 1}}>
-        <Text>kjeebjkwe</Text>
-      </View>
-    </SafeAreaView>
+    <View style={styles.rootContainer}>
+      <NavigationContainer>
+        <RootStack.Navigator screenOptions={{headerShown: false}}>
+          <RootStack.Screen name="Main" component={MainStackScreen} />
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 };
 
+export default App;
+
 const styles = StyleSheet.create({
-  sectionContainer: {
+  rootContainer: {
     flex: 1,
   },
+  spinnerWrapperView: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
 });
-
-export default App;
