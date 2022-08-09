@@ -6,6 +6,7 @@ import Home from './Home';
 function mapStateToProps(state) {
   return {
     Counter: state.dataReducer.counter,
+    ResultData: state.dataReducer.resultData,
   };
 }
 

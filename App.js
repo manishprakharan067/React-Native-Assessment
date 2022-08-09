@@ -12,20 +12,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {MainStackScreen} from './root/NavigationRoutes';
 import {Provider} from 'react-redux';
-import store from './redux/Store';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './redux/Store';
 
 const RootStack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <Provider store={store}>
-      <View style={styles.rootContainer}>
-        <NavigationContainer>
-          <RootStack.Navigator screenOptions={{headerShown: false}}>
-            <RootStack.Screen name="Main" component={MainStackScreen} />
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </View>
+      <PersistGate persistor={persistor} loading={null}>
+        <View style={styles.rootContainer}>
+          <NavigationContainer>
+            <RootStack.Navigator screenOptions={{headerShown: false}}>
+              <RootStack.Screen name="Main" component={MainStackScreen} />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </View>
+      </PersistGate>
     </Provider>
   );
 };

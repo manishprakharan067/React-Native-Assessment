@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -10,16 +10,37 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import moment from 'moment';
 import Data from './Data.json';
+import GetAlbumAPI from './api/GetAlbumAPI';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function Home(props) {
   const isDarkMode = useColorScheme() === 'dark';
+  const [albumData, setAlbumData] = useState([]);
+  console.log(props);
 
   const {navigation} = props;
+  console.log(props);
+
+  useEffect(() => {
+    if (props.ResultData) {
+      setAlbumData(props.ResultData);
+    } else {
+      new GetAlbumAPI().getAlbumList(
+        res => {
+          props.saveAlbumData(res.data.results);
+          setAlbumData(res.data.results);
+        },
+        error => {
+          console.log(error);
+        },
+      );
+    }
+  }, []);
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -50,10 +71,21 @@ export default function Home(props) {
     <SafeAreaView style={styles.sectionContainer}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <FlatList
-        data={Data.results}
+        data={albumData}
         renderItem={renderItem}
         keyExtractor={item => item.trackId}
       />
+      {albumData.length == 0 ? (
+        <ActivityIndicator
+          color={'red'}
+          size={'large'}
+          style={{
+            position: 'absolute',
+            top: height / 2,
+            left: width / 2.1,
+          }}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }
