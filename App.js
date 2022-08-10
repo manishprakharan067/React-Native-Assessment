@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,10 +14,19 @@ import {MainStackScreen} from './root/NavigationRoutes';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './redux/Store';
+import {
+  requestUserPermission,
+  notificationListener,
+} from './utils/NotficationServices';
 
 const RootStack = createNativeStackNavigator();
 
-const App = () => {
+function App() {
+  useEffect(() => {
+    requestUserPermission();
+    notificationListener();
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
@@ -31,7 +40,7 @@ const App = () => {
       </PersistGate>
     </Provider>
   );
-};
+}
 
 export default App;
 

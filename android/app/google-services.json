@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "206292792383",
+    "project_id": "reactnativeassessment-1fee5",
+    "storage_bucket": "reactnativeassessment-1fee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206292792383:android:a08f54452eb6b30097f48a",
+        "android_client_info": {
+          "package_name": "com.awesomeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206292792383-otia0c7l6t33eidg53joto25u5kr1849.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASiQgWhLE49ytNQHDibLIBJt37Fl3mxvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206292792383-otia0c7l6t33eidg53joto25u5kr1849.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
