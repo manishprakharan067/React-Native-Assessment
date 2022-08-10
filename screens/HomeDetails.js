@@ -28,7 +28,7 @@ export default function HomeDetailsScreen(props) {
       </TouchableOpacity>
       <WebView
         source={{
-          uri: route.params.details,
+          uri: route?.params?.details,
         }}
         onLoadStart={() => setVisible(true)}
         onLoadEnd={() => setVisible(false)}

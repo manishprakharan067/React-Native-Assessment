@@ -4,7 +4,6 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   FlatList,
   Image,
@@ -22,18 +21,13 @@ import GetAlbumAPI from '../api/GetAlbumAPI';
 const {width, height} = Dimensions.get('screen');
 
 export default function Home(props) {
-  const isDarkMode = useColorScheme() === 'dark';
   const [albumData, setAlbumData] = useState([]);
-  console.log(props);
-
   const {navigation} = props;
-  console.log(props);
 
   //check for internet connectivity
   useEffect(() => {
     if (Platform.OS == 'ios') {
       NativeModules.RNInternet.findEvents(res => {
-        console.log(res);
         if (res == 'NO') {
           Alert.alert('Internet Not Connected!');
         }
@@ -91,7 +85,7 @@ export default function Home(props) {
 
   return (
     <SafeAreaView style={styles.sectionContainer}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={'light-content'} />
       <FlatList
         data={albumData}
         renderItem={renderItem}
