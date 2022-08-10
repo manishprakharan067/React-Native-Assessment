@@ -16,8 +16,8 @@ import {
   Alert,
 } from 'react-native';
 import moment from 'moment';
-import Data from './Data.json';
-import GetAlbumAPI from './api/GetAlbumAPI';
+import Data from '../Data.json';
+import GetAlbumAPI from '../api/GetAlbumAPI';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -49,6 +49,7 @@ export default function Home(props) {
 
   useEffect(() => {
     if (props.ResultData) {
+      //get Data from store when user has killed the app
       setAlbumData(props.ResultData);
     } else {
       new GetAlbumAPI().getAlbumList(
