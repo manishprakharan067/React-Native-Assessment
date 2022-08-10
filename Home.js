@@ -11,6 +11,9 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  NativeModules,
+  Platform,
+  Alert,
 } from 'react-native';
 import moment from 'moment';
 import Data from './Data.json';
@@ -25,6 +28,24 @@ export default function Home(props) {
 
   const {navigation} = props;
   console.log(props);
+
+  //check for internet connectivity
+  useEffect(() => {
+    if (Platform.OS == 'ios') {
+      NativeModules.RNInternet.findEvents(res => {
+        console.log(res);
+        if (res == 'NO') {
+          Alert.alert('Internet Not Connected!');
+        }
+      });
+    } else if (Platform.OS == 'android') {
+      NativeModules.InternetCon.getInternetStatus(res => {
+        if (res == 'NO') {
+          Alert.alert('Internet Not Connected!');
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (props.ResultData) {
